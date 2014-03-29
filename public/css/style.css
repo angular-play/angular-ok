@@ -1,0 +1,28 @@
+#HelloApplication, #TestApplication {
+  border: 1px solid lightgray;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+body {
+  background-color: lightgray;
+}
+
+div.ui.button {
+/*   text-transform: none;
+  letter-spacing: 0.5em;
+  font-size: 150%;
+  text-shadow: 1px -1px 5px gray;
+  box-shadow: 1px 1px 10px black; */
+}
+
+div.ui.button:hover {
+  box-shadow: 1px 1px 10px green;
+}
+
+tr {
+  cursor: pointer;
+}
+
+
+

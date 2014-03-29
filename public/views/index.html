@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <script src="../bower_components/angular/angular.js"></script>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+
+    <body>
+
+        <div id="HelloApplication">
+
+            <div ng-controller="HelloController">
+                <button ng-click="change()">Change</button>
+                <input type="text" ng-model="message">
+                <div>{{message}}</div>
+                <div>{{module}}</div>
+            </div>
+
+        </div>
+
+        <div id="TestApplication">
+            <div ng-controller="TestController">
+                <input type="text" ng-model="module">
+                <div>{{module}}</div>
+            </div>
+        </div>
+
+    <script>
+
+        // Hello Application
+        var hello = angular.module("HelloApplication", ["TestApplication"]);
+
+        hello.controller("HelloController", function($scope, TestService, $interval){
+            $scope.message = "Hello Workd 2!";
+            $scope.module = TestService.module;
+
+            $scope.change = function(){
+                $scope.message = "New message";
+            };
+
+            var i = 0;
+
+            $interval(function(){
+                $scope.message = "Hello " + (i++);
+                //$scope.$apply();
+            }, 100);
+
+            i = 200;
+
+        });
+
+        // Test Application
+        var test = angular.module("TestApplication", []);
+        test.controller("TestController", function($scope, TestService){
+            $scope.module = TestService.module;
+        });
+
+        test.factory("TestService", function(){
+            var service = {
+                module: "I'm test applicatioin"
+            };
+
+            return {
+                module: service.module
+            };
+        });
+
+        angular.element(document).ready(function() {
+            angular.bootstrap(document.getElementById("HelloApplication"), ["HelloApplication"]);
+            angular.bootstrap(document.getElementById("TestApplication"), ["TestApplication"]);
+        });
+
+    </script>
+
+    </body>
+</html>
